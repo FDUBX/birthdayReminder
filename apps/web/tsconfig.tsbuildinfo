@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/api.ts","./src/auth.tsx","./src/main.tsx","./src/sw-push.ts","./src/sw.ts","./src/components/birthdayform.tsx","./src/components/iosinstallhint.tsx","./src/pages/birthdays.tsx","./src/pages/login.tsx","./src/pages/settings.tsx","./src/pages/signup.tsx","./test/birthdayform.test.tsx","./test/setup.ts"],"version":"5.9.3"}

@@ -32,8 +32,13 @@ export async function runNotifications(env: Env, now: Date): Promise<void> {
   for (const n of planned) {
     const msg = messageFor(n);
     for (const sub of subs) {
-      const { dead } = await sendPush(sub, msg, vapid);
-      if (dead) await env.DB.prepare("DELETE FROM push_subscriptions WHERE id = ?").bind(sub.id).run();
+      try {
+        const { dead } = await sendPush(sub, msg, vapid);
+        if (dead) await env.DB.prepare("DELETE FROM push_subscriptions WHERE id = ?").bind(sub.id).run();
+      } catch (err) {
+        // A flaky endpoint must not abort notifications to the remaining subscriptions.
+        console.error("push send failed for subscription", sub.id, err);
+      }
     }
   }
 }

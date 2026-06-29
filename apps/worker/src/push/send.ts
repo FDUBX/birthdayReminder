@@ -30,25 +30,18 @@ export async function sendPush(
   // Extract email from "mailto:email" or use subject directly
   const email = vapid.subject.startsWith("mailto:") ? vapid.subject.slice(7) : vapid.subject;
 
-  let res: Response;
-  try {
-    res = await sendPushNotification(
-      keyPair,
-      {
-        endpoint: target.endpoint,
-        keys: {
-          p256dh: target.p256dh,
-          auth: target.auth,
-        },
+  const res = await sendPushNotification(
+    keyPair,
+    {
+      endpoint: target.endpoint,
+      keys: {
+        p256dh: target.p256dh,
+        auth: target.auth,
       },
-      email,
-      JSON.stringify(message),
-    );
-  } catch (err) {
-    // Some push services signal gone subscriptions via exceptions in certain implementations
-    // Re-throw — callers should not swallow unknown errors
-    throw err;
-  }
+    },
+    email,
+    JSON.stringify(message),
+  );
 
   return { dead: res.status === 404 || res.status === 410 };
 }

@@ -1,7 +1,17 @@
 import type { Birthday, Settings } from "@bday/shared";
 
 async function j<T>(res: Response): Promise<T> {
-  if (!res.ok) throw new Error((await res.json().catch(() => ({})))?.error ?? `HTTP ${res.status}`);
+  if (!res.ok) {
+    const msg = (await res.json().catch(() => ({})))?.error ?? `HTTP ${res.status}`;
+    // Session expired mid-use: clear the client flag and bounce to login.
+    // Only when we believed we were logged in — preserves the server error
+    // message for fresh login/signup attempts (which legitimately 401).
+    if (res.status === 401 && localStorage.getItem("loggedIn") === "1") {
+      localStorage.removeItem("loggedIn");
+      location.href = "/login";
+    }
+    throw new Error(msg);
+  }
   return res.status === 204 ? (undefined as T) : res.json();
 }
 const opts = (method: string, body?: unknown): RequestInit => ({
