@@ -125,4 +125,30 @@ describe("birthdays CRUD (authenticated)", () => {
     );
     expect(res.status).toBe(400);
   });
+
+  it("POST with impossible day for month returns 400", async () => {
+    const res = await app.request(
+      "/api/birthdays",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Cookie: sessionCookie },
+        body: JSON.stringify({ name: "X", birth_month: 2, birth_day: 30 }),
+      },
+      env,
+    );
+    expect(res.status).toBe(400);
+  });
+
+  it("POST with Feb 29 and no year returns 201", async () => {
+    const res = await app.request(
+      "/api/birthdays",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Cookie: sessionCookie },
+        body: JSON.stringify({ name: "Leap", birth_month: 2, birth_day: 29 }),
+      },
+      env,
+    );
+    expect(res.status).toBe(201);
+  });
 });

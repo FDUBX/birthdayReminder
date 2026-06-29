@@ -1,3 +1,9 @@
+// Cloudflare Workers extends SubtleCrypto with timingSafeEqual, but lib.dom.d.ts
+// (pulled in transitively) does not declare it. Use a local type to satisfy tsc.
+type CfSubtle = SubtleCrypto & {
+  timingSafeEqual(a: ArrayBuffer | ArrayBufferView, b: ArrayBuffer | ArrayBufferView): boolean;
+};
+
 const ITERATIONS = 100_000;
 const KEY_LEN = 32;
 
@@ -35,5 +41,8 @@ export async function verifyPassword(password: string, stored: string): Promise<
     key,
     KEY_LEN * 8,
   );
-  return toB64(bits) === hashB64;
+  const expected = fromB64(hashB64);
+  const actual = new Uint8Array(bits);
+  if (actual.length !== expected.length) return false;
+  return (crypto.subtle as CfSubtle).timingSafeEqual(actual, expected);
 }

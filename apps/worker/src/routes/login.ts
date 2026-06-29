@@ -13,7 +13,7 @@ login.post("/api/login", async (c) => {
   }
   const user = await c.env.DB
     .prepare("SELECT id, password_hash FROM users WHERE email = ?")
-    .bind(email)
+    .bind(email.toLowerCase())
     .first<{ id: number; password_hash: string }>();
   if (!user || !(await verifyPassword(password, user.password_hash))) {
     return c.json({ error: "invalid credentials" }, 401);

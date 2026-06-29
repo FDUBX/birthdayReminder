@@ -20,7 +20,7 @@ export async function signSession(payload: SessionPayload, secret: string): Prom
 
 export async function verifySession(token: string, secret: string): Promise<SessionPayload | null> {
   try {
-    const { payload } = await jwtVerify(token, key(secret));
+    const { payload } = await jwtVerify(token, key(secret), { algorithms: ["HS256"] });
     if (typeof payload.userId !== "number") return null;
     return { userId: payload.userId };
   } catch {

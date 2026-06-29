@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import type { Env } from "../env";
 import { requireAuth } from "../auth/middleware";
+import { isLeap } from "@bday/shared";
 
 export const birthdays = new Hono<{ Bindings: Env; Variables: { userId: number } }>();
 
@@ -21,6 +22,8 @@ function validate(b: BodyShape): { name: string; month: number; day: number; yea
   if (typeof birth_day !== "number" || birth_day < 1 || birth_day > 31) return null;
   const year = birth_year === null || birth_year === undefined ? null : Number(birth_year);
   if (year !== null && (!Number.isInteger(year) || year < 1900 || year > 2100)) return null;
+  const daysInMonth = [31, (year !== null && !isLeap(year)) ? 28 : 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  if (birth_day > daysInMonth[birth_month - 1]!) return null;
   return { name: name.trim(), month: birth_month, day: birth_day, year };
 }
 
@@ -46,6 +49,7 @@ birthdays.put("/api/birthdays/:id", async (c) => {
   const v = validate(await c.req.json().catch(() => ({})));
   if (!v) return c.json({ error: "invalid input" }, 400);
   const id = Number(c.req.param("id"));
+  if (!Number.isInteger(id) || id < 1) return c.json({ error: "invalid id" }, 400);
   const res = await c.env.DB
     .prepare("UPDATE birthdays SET name = ?, birth_month = ?, birth_day = ?, birth_year = ?, updated_at = ? WHERE id = ?")
     .bind(v.name, v.month, v.day, v.year, new Date().toISOString(), id)
@@ -56,6 +60,7 @@ birthdays.put("/api/birthdays/:id", async (c) => {
 
 birthdays.delete("/api/birthdays/:id", async (c) => {
   const id = Number(c.req.param("id"));
+  if (!Number.isInteger(id) || id < 1) return c.json({ error: "invalid id" }, 400);
   const res = await c.env.DB.prepare("DELETE FROM birthdays WHERE id = ?").bind(id).run();
   if (res.meta.changes === 0) return c.json({ error: "not found" }, 404);
   return c.body(null, 204);
