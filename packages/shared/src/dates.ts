@@ -34,6 +34,8 @@ export function parisToday(now: Date): CalDate {
 }
 
 export function parisHour(now: Date): number {
-  const s = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", hourCycle: "h23" }).format(now);
-  return Number(s);
+  const parts = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "numeric", hourCycle: "h23" }).formatToParts(now);
+  const hour = parts.find((p) => p.type === "hour");
+  if (hour === undefined) throw new Error("parisHour: no hour part from Intl");
+  return Number(hour.value);
 }

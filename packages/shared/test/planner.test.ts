@@ -70,4 +70,12 @@ describe("planNotifications", () => {
     const result = planNotifications([birthdayNoMatch], settings, now);
     expect(result).toHaveLength(0);
   });
+
+  it("Feb 29 birthday triggers reminder ahead of its Feb 28 celebration in a non-leap year", () => {
+    // 2026 is non-leap. today = 2026-02-21 (Paris 08:00 = UTC 07:00 winter +1).
+    // reminder_days_before 7 → target 2026-02-28 → Feb 29 birthday celebrated Feb 28 → reminder fires.
+    const feb29: Birthday = { id: 4, name: "Dan", birth_month: 2, birth_day: 29, birth_year: 1992 };
+    const result = planNotifications([feb29], settings, new Date("2026-02-21T07:00:00Z"));
+    expect(result).toMatchObject([{ birthday: feb29, kind: "reminder", age: null, daysUntil: 7 }]);
+  });
 });
