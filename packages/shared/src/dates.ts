@@ -1,0 +1,39 @@
+export function ageFromYear(birthYear: number | null, targetYear: number): number | null {
+  if (birthYear === null) return null;
+  return targetYear - birthYear;
+}
+
+export interface CalDate { year: number; month: number; day: number; }
+
+export function isLeap(year: number): boolean {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+
+export function addDays(date: CalDate, days: number): CalDate {
+  const dt = new Date(Date.UTC(date.year, date.month - 1, date.day));
+  dt.setUTCDate(dt.getUTCDate() + days);
+  return { year: dt.getUTCFullYear(), month: dt.getUTCMonth() + 1, day: dt.getUTCDate() };
+}
+
+export function birthdayOnDate(birthMonth: number, birthDay: number, target: CalDate): boolean {
+  if (birthMonth === 2 && birthDay === 29 && !isLeap(target.year)) {
+    return target.month === 2 && target.day === 28;
+  }
+  return birthMonth === target.month && birthDay === target.day;
+}
+
+const TZ = "Europe/Paris";
+
+export function parisToday(now: Date): CalDate {
+  const s = new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" }).format(now);
+  const parts = s.split("-");
+  const year = Number(parts[0]);
+  const month = Number(parts[1]);
+  const day = Number(parts[2]);
+  return { year, month, day };
+}
+
+export function parisHour(now: Date): number {
+  const s = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", hourCycle: "h23" }).format(now);
+  return Number(s);
+}
