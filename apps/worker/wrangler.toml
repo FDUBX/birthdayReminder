@@ -12,5 +12,14 @@ database_id = "00000000-0000-0000-0000-000000000000"
 binding = "BACKUPS"
 bucket_name = "bday-backups"
 
+# Serve the built PWA from the same Worker (same-origin → the httpOnly session
+# cookie rides /api/* requests). No binding: assets are served automatically for
+# matching files; everything else (e.g. /api/*) falls through to the Worker.
+# SPA fallback returns index.html for client-side routes like /settings.
+[assets]
+directory = "../web/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
 [triggers]
 crons = ["0 * * * *"]
