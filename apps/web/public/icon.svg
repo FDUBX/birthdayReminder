@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#e85d75"/>
+  <!-- candles -->
+  <g stroke="#fff" stroke-width="12" stroke-linecap="round">
+    <line x1="186" y1="150" x2="186" y2="196"/>
+    <line x1="256" y1="138" x2="256" y2="196"/>
+    <line x1="326" y1="150" x2="326" y2="196"/>
+  </g>
+  <!-- flames -->
+  <g fill="#ffd34e">
+    <circle cx="186" cy="134" r="13"/>
+    <circle cx="256" cy="122" r="13"/>
+    <circle cx="326" cy="134" r="13"/>
+  </g>
+  <!-- cake top layer (frosting) -->
+  <path d="M120 250 q34 -34 68 0 q34 34 68 0 q34 -34 68 0 q34 34 68 0 l0 36 l-272 0 z" fill="#fff"/>
+  <!-- cake body -->
+  <rect x="120" y="284" width="272" height="118" rx="16" fill="#fff"/>
+  <!-- plate -->
+  <rect x="96" y="402" width="320" height="26" rx="13" fill="#ffd34e"/>
+</svg>
