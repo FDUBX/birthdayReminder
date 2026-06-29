@@ -17,6 +17,14 @@ app.route("/", birthdays);
 app.route("/", settings);
 app.route("/", push);
 
+// Anything not handled above: /api/* → JSON 404; everything else → static assets.
+// The ASSETS binding (configured with SPA not_found_handling) serves real files
+// and falls back to index.html for client-side routes (e.g. /settings).
+app.all("*", (c) => {
+  if (c.req.path.startsWith("/api/")) return c.json({ error: "not found" }, 404);
+  return c.env.ASSETS.fetch(c.req.raw);
+});
+
 export { app };
 export default {
   fetch: app.fetch,

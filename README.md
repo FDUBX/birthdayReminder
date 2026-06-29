@@ -61,27 +61,23 @@ wrangler secret put VAPID_PRIVATE_KEY    # depuis gen-vapid.mjs
 wrangler secret put VAPID_SUBJECT        # ex: mailto:toi@example.com
 ```
 
-### 4. Migrations + déploiement Worker
+### 4. Build du front + migrations + déploiement
+
+Le Worker sert **à la fois la PWA et l'API** via Cloudflare Static Assets (`[assets]` dans `wrangler.toml`, binding `ASSETS`, `not_found_handling = "single-page-application"`). Front et API sont donc **same-origin** par construction : le cookie de session `httpOnly`/`SameSite=Lax` accompagne les requêtes `/api/*`, aucun routing multi-domaine à configurer.
+
+Le front doit être buildé **avant** le déploiement (le Worker uploade `apps/web/dist`) :
 
 ```bash
+pnpm --filter web build          # produit apps/web/dist (servi par le Worker)
 pnpm --filter worker migrate:remote
-pnpm --filter worker deploy
+pnpm --filter worker deploy       # déploie le Worker + les assets
 ```
 
-### 5. Front (Cloudflare Pages)
+Routage interne (dans `apps/worker/src/index.ts`) :
+- `/api/*` → routes Hono ; route inconnue sous `/api/` → JSON 404
+- tout le reste → assets statiques ; route client inexistante (`/settings`, …) → `index.html` (fallback SPA)
 
-- Build command : `pnpm --filter web build`
-- Output : `apps/web/dist`
-
-### ⚠️ Exigence same-origin (cookie de session)
-
-La session est un cookie `httpOnly` + `SameSite=Lax`. Le front et l'API **doivent être servis sur le même hostname**, sinon le cookie n'accompagne pas les requêtes `/api/*` (le login échoue silencieusement).
-
-Configurer un domaine unique, ex. `anniv.example.com` :
-- Pages sert `anniv.example.com/*`
-- Une route Worker `anniv.example.com/api/*` pointe vers `bday-worker`
-
-(Alternative : servir le `dist/` directement depuis le Worker via Static Assets, en laissant Hono répondre sur `/api/*` et fallback assets pour le reste.)
+Le Worker est accessible sur son URL `*.workers.dev` ou un domaine custom — un seul hostname pour tout.
 
 ## Notifications iOS — obligatoire
 
