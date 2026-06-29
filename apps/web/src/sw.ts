@@ -1,0 +1,15 @@
+/// <reference lib="webworker" />
+import { precacheAndRoute } from "workbox-precaching";
+declare const self: ServiceWorkerGlobalScope;
+
+precacheAndRoute(self.__WB_MANIFEST);
+
+self.addEventListener("push", (event) => {
+  const data = event.data?.json() ?? { title: "Anniversaire", body: "" };
+  event.waitUntil(self.registration.showNotification(data.title, { body: data.body, icon: "/icon-192.png" }));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(self.clients.openWindow("/"));
+});
