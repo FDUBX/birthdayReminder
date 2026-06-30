@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
+    "deploy:worker": "wrangler deploy",
     "test": "vitest run",
     "build": "tsc --noEmit",
     "migrate:local": "wrangler d1 migrations apply bday-db --local",

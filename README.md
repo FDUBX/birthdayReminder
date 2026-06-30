@@ -70,7 +70,7 @@ Le front doit être buildé **avant** le déploiement (le Worker uploade `apps/w
 ```bash
 pnpm --filter web build          # produit apps/web/dist (servi par le Worker)
 pnpm --filter worker migrate:remote
-pnpm --filter worker deploy       # déploie le Worker + les assets
+pnpm --filter worker deploy:worker   # déploie le Worker + les assets
 ```
 
 Routage interne (dans `apps/worker/src/index.ts`) :
