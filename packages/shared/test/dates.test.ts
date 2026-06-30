@@ -6,6 +6,7 @@ import {
   birthdayOnDate,
   parisToday,
   parisHour,
+  daysUntilNextBirthday,
 } from "../src/dates";
 
 describe("ageFromYear", () => {
@@ -66,5 +67,22 @@ describe("parisToday and parisHour", () => {
     const now = new Date("2026-01-01T23:30:00Z");
     expect(parisToday(now)).toEqual({ year: 2026, month: 1, day: 2 });
     expect(parisHour(now)).toBe(0);
+  });
+});
+
+describe("daysUntilNextBirthday", () => {
+  it("birthday in 5 days: today 2026-03-10, birthday 3/15 → 5", () => {
+    expect(daysUntilNextBirthday(3, 15, { year: 2026, month: 3, day: 10 })).toBe(5);
+  });
+  it("birthday today: today 2026-03-15, birthday 3/15 → 0", () => {
+    expect(daysUntilNextBirthday(3, 15, { year: 2026, month: 3, day: 15 })).toBe(0);
+  });
+  it("birthday passed: today 2026-03-20, birthday 3/15 → wraps ~360", () => {
+    const days = daysUntilNextBirthday(3, 15, { year: 2026, month: 3, day: 20 });
+    expect(days).toBeGreaterThan(300);
+    expect(days).toBeLessThanOrEqual(366);
+  });
+  it("Feb29 birthday, today 2026-02-27 (non-leap) → 1 (celebrated Feb28)", () => {
+    expect(daysUntilNextBirthday(2, 29, { year: 2026, month: 2, day: 27 })).toBe(1);
   });
 });

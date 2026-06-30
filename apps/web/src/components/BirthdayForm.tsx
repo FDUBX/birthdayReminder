@@ -23,15 +23,54 @@ export default function BirthdayForm({ initial, onSubmit, onCancel }: Props) {
     const d = Number(parts[2] ?? "0");
     onSubmit({ name: name.trim(), birth_month: m, birth_day: d, birth_year: unknownYear ? null : y });
   }
+
   return (
-    <form onSubmit={submit} style={{ display: "grid", gap: 8 }}>
-      <input placeholder="Nom" value={name} onChange={(e) => setName(e.target.value)} required />
-      <label>Date <input aria-label="Date" type="date" value={date} onChange={(e) => setDate(e.target.value)} required /></label>
-      <label><input aria-label="Année inconnue" type="checkbox" checked={unknownYear} onChange={(e) => setUnknownYear(e.target.checked)} /> Année inconnue</label>
-      <div style={{ display: "flex", gap: 8 }}>
-        <button type="submit">Enregistrer</button>
-        <button type="button" onClick={onCancel}>Annuler</button>
-      </div>
-    </form>
+    <div className="card">
+      <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "var(--sp-md)" }}>
+        <div className="field">
+          <label className="label" htmlFor="bform-name">Nom</label>
+          <input
+            id="bform-name"
+            className="input"
+            placeholder="Nom"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field">
+          <label className="label" htmlFor="bform-date">Date</label>
+          <input
+            id="bform-date"
+            className="input"
+            aria-label="Date"
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+          />
+        </div>
+
+        <label className="checkbox-row">
+          <input
+            aria-label="Année inconnue"
+            type="checkbox"
+            checked={unknownYear}
+            onChange={(e) => setUnknownYear(e.target.checked)}
+          />
+          Année inconnue
+        </label>
+
+        <div style={{ display: "flex", gap: "var(--sp-sm)" }}>
+          <button type="submit" className="btn" style={{ flex: 1 }}>
+            Enregistrer
+          </button>
+          <button type="button" className="btn btn--ghost" onClick={onCancel} style={{ flex: 1 }}>
+            Annuler
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
