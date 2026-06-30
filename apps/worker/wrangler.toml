@@ -6,7 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "bday-db"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "918bd6e7-889c-4929-87a2-7ab4c6ec2a07"
 
 [[r2_buckets]]
 binding = "BACKUPS"
