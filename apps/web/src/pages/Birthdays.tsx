@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import type { Birthday } from "@bday/shared";
-import { ageFromYear, daysUntilNextBirthday, parisToday } from "@bday/shared";
+import { currentAge, daysUntilNextBirthday, parisToday } from "@bday/shared";
 import { api } from "../api";
 import BirthdayForm from "../components/BirthdayForm";
 import { Settings, Plus, Pencil, Trash, Cake } from "../components/icons";
@@ -111,7 +111,7 @@ export default function Birthdays() {
       ) : (
         <ul className="birthday-list">
           {sorted.map((b) => {
-            const age = ageFromYear(b.birth_year, today.year);
+            const age = currentAge(b.birth_year, b.birth_month, b.birth_day, today);
             return (
               <li key={b.id} className="birthday-item">
                 <div className="birthday-item__info">

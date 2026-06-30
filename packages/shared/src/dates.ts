@@ -40,6 +40,22 @@ export function parisHour(now: Date): number {
   return Number(hour.value);
 }
 
+export function currentAge(
+  birthYear: number | null,
+  birthMonth: number,
+  birthDay: number,
+  today: CalDate,
+): number | null {
+  // Actual age lived right now (not the age reached at the next birthday).
+  // Subtracts one when this year's birthday has not happened yet.
+  if (birthYear === null) return null;
+  const reached =
+    birthdayOnDate(birthMonth, birthDay, today) ||
+    birthMonth < today.month ||
+    (birthMonth === today.month && birthDay < today.day);
+  return today.year - birthYear - (reached ? 0 : 1);
+}
+
 export function daysUntilNextBirthday(birthMonth: number, birthDay: number, today: CalDate): number {
   // Returns 0 if it's today (incl. Feb29→Feb28 rule in non-leap years).
   // Otherwise returns days until the next occurrence.

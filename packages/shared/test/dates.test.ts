@@ -7,7 +7,27 @@ import {
   parisToday,
   parisHour,
   daysUntilNextBirthday,
+  currentAge,
 } from "../src/dates";
+
+describe("currentAge", () => {
+  const today = { year: 2026, month: 6, day: 30 };
+  it("subtracts one when this year's birthday has not happened yet", () => {
+    expect(currentAge(1986, 12, 22, today)).toBe(39); // born Dec, today June
+  });
+  it("does not subtract when this year's birthday already passed", () => {
+    expect(currentAge(1987, 4, 15, today)).toBe(39); // born April, today June
+  });
+  it("counts the full year on the birthday itself", () => {
+    expect(currentAge(2000, 6, 30, today)).toBe(26);
+  });
+  it("returns null when birth year is unknown", () => {
+    expect(currentAge(null, 6, 30, today)).toBeNull();
+  });
+  it("treats a Feb 29 birthday as reached on Feb 28 of a non-leap year", () => {
+    expect(currentAge(1992, 2, 29, { year: 2026, month: 2, day: 28 })).toBe(34);
+  });
+});
 
 describe("ageFromYear", () => {
   it("returns age when birth year is known", () => {
