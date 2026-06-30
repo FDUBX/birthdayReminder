@@ -39,3 +39,13 @@ export function parisHour(now: Date): number {
   if (hour === undefined) throw new Error("parisHour: no hour part from Intl");
   return Number(hour.value);
 }
+
+export function daysUntilNextBirthday(birthMonth: number, birthDay: number, today: CalDate): number {
+  // Returns 0 if it's today (incl. Feb29→Feb28 rule in non-leap years).
+  // Otherwise returns days until the next occurrence.
+  for (let i = 0; i < 366; i++) {
+    const d = addDays(today, i);
+    if (birthdayOnDate(birthMonth, birthDay, d)) return i;
+  }
+  return 366; // unreachable
+}
