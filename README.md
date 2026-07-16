@@ -3,22 +3,21 @@
 <img src="assets/readme/hero.svg" alt="BirthdayReminder — ne rate plus jamais un anniversaire à souhaiter. PWA familiale, notifications push, serverless Cloudflare." width="100%">
 
 <p>
-  <a href="https://bday-worker.francois-dubeaux.workers.dev"><img alt="Production live" src="https://img.shields.io/badge/prod-live-e85d75?style=flat-square"></a>
+  <img alt="Production live" src="https://img.shields.io/badge/prod-live-e85d75?style=flat-square">
   <img alt="71 tests passing" src="https://img.shields.io/badge/tests-71%20passing-3f9d6d?style=flat-square">
   <img alt="Cloudflare Workers D1 R2" src="https://img.shields.io/badge/Cloudflare-Workers%20%C2%B7%20D1%20%C2%B7%20R2-f0748c?style=flat-square">
   <img alt="React 19" src="https://img.shields.io/badge/React-19-61dafb?style=flat-square">
   <img alt="TypeScript strict" src="https://img.shields.io/badge/TypeScript-strict-2f6f9f?style=flat-square">
 </p>
 
-### [→ Ouvrir l'application](https://bday-worker.francois-dubeaux.workers.dev)
+### [→ Déployer votre instance](#6-premier-déploiement-from-scratch)
 
 </div>
 
 > **PWA (Android + iOS)** qui rappelle les anniversaires d'une famille via notifications push.
 > Stack **100 % serverless Cloudflare** (un seul Worker sert la PWA *et* l'API), base D1 (SQLite), backups R2.
 
-**Production :** https://bday-worker.francois-dubeaux.workers.dev
-**DB D1 :** `bday-db` (`918bd6e7-889c-4929-87a2-7ab4c6ec2a07`) · **Bucket R2 :** `bday-backups`
+**Déploiement :** un unique Worker Cloudflare (ex. `bday-worker.<votre-sous-domaine>.workers.dev`), base D1 `bday-db`, bucket R2 `bday-backups`.
 
 ---
 
@@ -60,7 +59,7 @@ pnpm --filter worker deploy:worker # déploie le Worker + les assets
 
 Vérifier le déploiement :
 ```bash
-curl https://bday-worker.francois-dubeaux.workers.dev/api/health   # → {"ok":true}
+curl https://bday-worker.<votre-sous-domaine>.workers.dev/api/health   # → {"ok":true}
 ```
 
 Côté navigateur/téléphone : **hard refresh** pour récupérer le nouveau service worker (mise à jour auto via `registerType: "autoUpdate"`, mais le hard refresh accélère).
@@ -236,7 +235,7 @@ npx wrangler secret put JWT_SECRET          # chaîne aléatoire longue, ex: ope
 npx wrangler secret put INVITE_CODE         # code que la famille tape à l'inscription
 npx wrangler secret put VAPID_PUBLIC_KEY    # depuis gen-vapid.mjs
 npx wrangler secret put VAPID_PRIVATE_KEY   # depuis gen-vapid.mjs
-npx wrangler secret put VAPID_SUBJECT       # mailto:fran.dub@gmail.com
+npx wrangler secret put VAPID_SUBJECT       # mailto:you@example.com
 ```
 
 > ⚠️ `wrangler secret put NOM valeur` **ne marche pas** — la valeur en argument est ignorée. Lance la commande seule puis colle au prompt, ou pipe : `echo "valeur" | npx wrangler secret put NOM`.
@@ -375,7 +374,7 @@ npx wrangler secret list
 npx wrangler r2 object get bday-backups/backups/<date>.json --file ./b.json --remote
 
 # Vérifier la prod
-curl https://bday-worker.francois-dubeaux.workers.dev/api/health
+curl https://bday-worker.<votre-sous-domaine>.workers.dev/api/health
 ```
 
 ---
