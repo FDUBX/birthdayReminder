@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/readme/hero.svg" alt="BirthdayReminder — ne rate plus jamais un anniversaire à souhaiter. PWA familiale, notifications push, serverless Cloudflare." width="100%">
+<img src="assets/readme/hero.gif" alt="BirthdayReminder — ne rate plus jamais un anniversaire à souhaiter. PWA familiale, notifications push, serverless Cloudflare." width="100%">
 
 <p>
   <img alt="Production live" src="https://img.shields.io/badge/prod-live-e85d75?style=flat-square">

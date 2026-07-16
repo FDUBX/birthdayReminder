@@ -27,7 +27,7 @@
   <text x="175" y="103" text-anchor="middle" font-size="15" font-weight="700" letter-spacing="1.5" fill="#c8455e">PWA · CLOUDFLARE</text>
 
   <!-- title -->
-  <text x="66" y="192" font-size="70" font-weight="800" fill="#c8455e" letter-spacing="-1">Birthday<tspan fill="#e85d75">Reminder</tspan></text>
+  <text id="title" x="66" y="192" font-size="70" font-weight="800" fill="#c8455e" letter-spacing="-1">Birthday<tspan fill="#e85d75">Reminder</tspan></text>
 
   <!-- tagline -->
   <text x="70" y="238" font-size="24" font-weight="500" fill="#7a5c60">Ne rate plus jamais un anniversaire à souhaiter.</text>
@@ -49,6 +49,7 @@
   </g>
 
   <!-- ===== right: claymorphism cake card ===== -->
+  <g id="cake-card">
   <!-- soft layered shadow (no filter) -->
   <rect x="830" y="120" width="300" height="230" rx="40" fill="#e8b9c2" opacity="0.55"/>
   <rect x="822" y="110" width="300" height="230" rx="40" fill="#ffffff"/>
@@ -73,5 +74,6 @@
     <rect x="2" y="168" width="184" height="46" rx="10" fill="#f0a4b3"/>
     <!-- plate -->
     <rect x="-14" y="214" width="216" height="18" rx="9" fill="#ffd34e"/>
+  </g>
   </g>
 </svg>
