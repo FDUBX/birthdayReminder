@@ -1,0 +1,25 @@
+{
+  "width": 1200,
+  "fps": 30,
+  "duration": 5.0,
+  "colors": 256,
+  "dither": "none",
+  "clip_to_base_alpha": true,
+  "max_size_mb": 2.5,
+  "reveals": [
+    {
+      "id": "title",
+      "axis": "x",
+      "start": 0.35,
+      "end": 1.35,
+      "exit": { "start": 4.2, "end": 4.95 }
+    }
+  ],
+  "layers": [
+    {
+      "id": "cake-card",
+      "enter": { "start": 0.5, "end": 1.6, "from": [0, 46] },
+      "exit": { "start": 4.2, "end": 4.95, "to": [0, 46] }
+    }
+  ]
+}
