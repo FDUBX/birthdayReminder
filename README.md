@@ -5,7 +5,8 @@
 <p>
   <img alt="Production live" src="https://img.shields.io/badge/prod-live-e85d75?style=flat-square">
   <img alt="Hébergement gratuit" src="https://img.shields.io/badge/hébergement-gratuit-ffd34e?style=flat-square">
-  <img alt="71 tests passing" src="https://img.shields.io/badge/tests-71%20passing-3f9d6d?style=flat-square">
+  <a href="https://github.com/FDUBX/birthdayReminder/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/FDUBX/birthdayReminder/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square"></a>
   <img alt="Cloudflare Workers D1 R2" src="https://img.shields.io/badge/Cloudflare-Workers%20%C2%B7%20D1%20%C2%B7%20R2-f0748c?style=flat-square">
   <img alt="React 19" src="https://img.shields.io/badge/React-19-61dafb?style=flat-square">
   <img alt="TypeScript strict" src="https://img.shields.io/badge/TypeScript-strict-2f6f9f?style=flat-square">
