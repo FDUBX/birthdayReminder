@@ -13,7 +13,7 @@
   "dependencies": {
     "@bday/shared": "workspace:*",
     "hono": "^4.6.0",
-    "jose": "^5.9.0",
+    "jose": "^6.2.3",
     "web-push-browser": "^1.4.2"
   },
   "devDependencies": {
