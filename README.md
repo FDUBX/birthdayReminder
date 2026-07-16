@@ -4,6 +4,7 @@
 
 <p>
   <img alt="Production live" src="https://img.shields.io/badge/prod-live-e85d75?style=flat-square">
+  <img alt="Hébergement gratuit" src="https://img.shields.io/badge/hébergement-gratuit-ffd34e?style=flat-square">
   <img alt="71 tests passing" src="https://img.shields.io/badge/tests-71%20passing-3f9d6d?style=flat-square">
   <img alt="Cloudflare Workers D1 R2" src="https://img.shields.io/badge/Cloudflare-Workers%20%C2%B7%20D1%20%C2%B7%20R2-f0748c?style=flat-square">
   <img alt="React 19" src="https://img.shields.io/badge/React-19-61dafb?style=flat-square">
@@ -16,6 +17,21 @@
 
 > **PWA (Android + iOS)** qui rappelle les anniversaires d'une famille via notifications push.
 > Stack **100 % serverless Cloudflare** (un seul Worker sert la PWA *et* l'API), base D1 (SQLite), backups R2.
+
+> [!TIP]
+> **💸 Ce déploiement ne coûte rien — 0 €/mois.** Aucun serveur à payer, aucune carte bancaire requise pour démarrer. Tout tourne sur le *free tier* Cloudflare, et à l'échelle d'une famille l'usage reste largement sous les quotas gratuits.
+
+**Pourquoi c'est gratuit** (quotas gratuits Cloudflare vs usage réel d'une famille de 2-5 personnes) :
+
+| Service | Quota gratuit | Usage typique famille |
+|---------|---------------|------------------------|
+| Workers | 100 000 requêtes/jour | quelques centaines |
+| Static Assets (PWA) | illimité | — |
+| D1 (SQLite) | 5 Go · 5 M lectures/jour | quelques Ko |
+| R2 (backups) | 10 Go | quelques Ko/jour |
+| Cron Triggers | inclus | 1 exécution/heure |
+
+Tu déploies ta propre instance en quelques commandes → [Premier déploiement](#6-premier-déploiement-from-scratch).
 
 **Déploiement :** un unique Worker Cloudflare (ex. `bday-worker.<votre-sous-domaine>.workers.dev`), base D1 `bday-db`, bucket R2 `bday-backups`.
 

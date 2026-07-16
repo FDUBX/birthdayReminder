@@ -8,3 +8,4 @@ coverage/
 # compiled JS emitted next to TS sources (this is an all-TypeScript project)
 apps/web/src/**/*.js
 apps/web/test/**/*.js
+docs/
