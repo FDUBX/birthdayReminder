@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "typescript": "^5.6.0",
-    "vitest": "^2.1.0"
+    "vitest": "^3.2.6"
   },
   "pnpm": {
     "onlyBuiltDependencies": ["esbuild", "sharp", "workerd"]
