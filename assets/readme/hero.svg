@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="100%" font-family="Segoe UI, system-ui, -apple-system, Helvetica Neue, Arial, sans-serif" role="img" aria-label="BirthdayReminder — rappels d'anniversaires pour toute la famille, PWA sur Cloudflare">
+  <title>BirthdayReminder — rappels d'anniversaires pour toute la famille, PWA sur Cloudflare</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff5f3"/>
+      <stop offset="1" stop-color="#ffe4e9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- canvas -->
+  <rect x="0" y="0" width="1200" height="420" rx="36" fill="url(#bg)"/>
+
+  <!-- confetti -->
+  <g opacity="0.9">
+    <circle cx="120" cy="70" r="7" fill="#ffd34e"/>
+    <circle cx="1085" cy="70" r="6" fill="#e85d75"/>
+    <circle cx="640" cy="42" r="5" fill="#f0a4b3"/>
+    <rect x="150" y="360" width="12" height="12" rx="3" fill="#ffd34e" transform="rotate(20 156 366)"/>
+    <rect x="700" y="372" width="12" height="12" rx="3" fill="#f0748c" transform="rotate(-15 706 378)"/>
+    <circle cx="70" cy="300" r="5" fill="#f0748c"/>
+    <circle cx="600" cy="392" r="6" fill="#ffd34e"/>
+  </g>
+
+  <!-- ===== left: wordmark + copy ===== -->
+  <!-- kicker pill -->
+  <rect x="70" y="80" width="210" height="34" rx="17" fill="#fbe0e5"/>
+  <text x="175" y="103" text-anchor="middle" font-size="15" font-weight="700" letter-spacing="1.5" fill="#c8455e">PWA · CLOUDFLARE</text>
+
+  <!-- title -->
+  <text x="66" y="192" font-size="70" font-weight="800" fill="#c8455e" letter-spacing="-1">Birthday<tspan fill="#e85d75">Reminder</tspan></text>
+
+  <!-- tagline -->
+  <text x="70" y="238" font-size="24" font-weight="500" fill="#7a5c60">Ne rate plus jamais un anniversaire à souhaiter.</text>
+  <text x="70" y="270" font-size="18" font-weight="400" fill="#9a7d81">Liste familiale partagée · notifications push · iOS &amp; Android.</text>
+
+  <!-- feature pills -->
+  <g font-size="15" font-weight="600" fill="#c8455e">
+    <rect x="70" y="312" width="150" height="36" rx="18" fill="#ffffff"/>
+    <text x="145" y="335" text-anchor="middle">Push VAPID</text>
+
+    <rect x="234" y="312" width="196" height="36" rx="18" fill="#ffffff"/>
+    <text x="332" y="335" text-anchor="middle">Rappels J-7 &amp; jour J</text>
+
+    <rect x="444" y="312" width="140" height="36" rx="18" fill="#ffffff"/>
+    <text x="514" y="335" text-anchor="middle">Serverless</text>
+  </g>
+
+  <!-- ===== right: claymorphism cake card ===== -->
+  <!-- soft layered shadow (no filter) -->
+  <rect x="830" y="120" width="300" height="230" rx="40" fill="#e8b9c2" opacity="0.55"/>
+  <rect x="822" y="110" width="300" height="230" rx="40" fill="#ffffff"/>
+
+  <g transform="translate(900 152)">
+    <!-- candles -->
+    <g stroke="#e85d75" stroke-width="9" stroke-linecap="round">
+      <line x1="34" y1="34" x2="34" y2="74"/>
+      <line x1="82" y1="24" x2="82" y2="74"/>
+      <line x1="130" y1="34" x2="130" y2="74"/>
+    </g>
+    <!-- flames -->
+    <g fill="#ffd34e">
+      <circle cx="34" cy="22" r="10"/>
+      <circle cx="82" cy="12" r="10"/>
+      <circle cx="130" cy="22" r="10"/>
+    </g>
+    <!-- frosting -->
+    <path d="M2 110 q23 -24 46 0 q23 24 46 0 q23 -24 46 0 q23 24 46 0 l0 26 l-184 0 z" fill="#e85d75"/>
+    <!-- cake body -->
+    <rect x="2" y="134" width="184" height="80" rx="12" fill="#f7c9d1"/>
+    <rect x="2" y="168" width="184" height="46" rx="10" fill="#f0a4b3"/>
+    <!-- plate -->
+    <rect x="-14" y="214" width="216" height="18" rx="9" fill="#ffd34e"/>
+  </g>
+</svg>

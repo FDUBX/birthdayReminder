@@ -1,7 +1,21 @@
-# BirthdayReminder
+<div align="center">
 
-PWA (Android + iOS) qui rappelle les anniversaires d'une famille via notifications push.
-Stack 100 % serverless Cloudflare, base D1 (SQLite), backups sur R2.
+<img src="assets/readme/hero.svg" alt="BirthdayReminder — ne rate plus jamais un anniversaire à souhaiter. PWA familiale, notifications push, serverless Cloudflare." width="100%">
+
+<p>
+  <a href="https://bday-worker.francois-dubeaux.workers.dev"><img alt="Production live" src="https://img.shields.io/badge/prod-live-e85d75?style=flat-square"></a>
+  <img alt="71 tests passing" src="https://img.shields.io/badge/tests-71%20passing-3f9d6d?style=flat-square">
+  <img alt="Cloudflare Workers D1 R2" src="https://img.shields.io/badge/Cloudflare-Workers%20%C2%B7%20D1%20%C2%B7%20R2-f0748c?style=flat-square">
+  <img alt="React 19" src="https://img.shields.io/badge/React-19-61dafb?style=flat-square">
+  <img alt="TypeScript strict" src="https://img.shields.io/badge/TypeScript-strict-2f6f9f?style=flat-square">
+</p>
+
+### [→ Ouvrir l'application](https://bday-worker.francois-dubeaux.workers.dev)
+
+</div>
+
+> **PWA (Android + iOS)** qui rappelle les anniversaires d'une famille via notifications push.
+> Stack **100 % serverless Cloudflare** (un seul Worker sert la PWA *et* l'API), base D1 (SQLite), backups R2.
 
 **Production :** https://bday-worker.francois-dubeaux.workers.dev
 **DB D1 :** `bday-db` (`918bd6e7-889c-4929-87a2-7ab4c6ec2a07`) · **Bucket R2 :** `bday-backups`
