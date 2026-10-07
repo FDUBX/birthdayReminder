@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@bday/shared": "workspace:*",
-    "hono": "^4.6.0",
+    "hono": "^4.13.7",
     "jose": "^5.9.0",
     "web-push-browser": "^1.4.2"
   },
